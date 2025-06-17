@@ -2,6 +2,11 @@ from db.db_connection import MedsecureDBConnection
 from env import host, user, password, database
 
 db_connection = MedsecureDBConnection(host, user, password, database)
+db_connection.reinitialize_database()
+# db_connection.insert_patient(
+#     "Yash", "Tulsyan", "yashwardhan.tulsyan@example.com",
+#     "1234567890", "2220-09-24", "Male", "B+", 0, "Single"
+# )
 
 while True:
     print("\n--- MENU ---")
@@ -24,8 +29,8 @@ while True:
                 ROUND(AVG(vt.bp_diastolic), 1) AS avg_bp_diastolic,
                 ROUND(AVG(vt.spo2), 1) AS avg_spo2
             FROM vitals vt
-            JOIN visit vi ON vt.visit_id = vi.visit_id
-            JOIN doctor d ON vi.doctor_id = d.doctor_id
+            JOIN visits vi ON vt.visit_id = vi.visit_id
+            JOIN doctors d ON vi.doctor_id = d.doctor_id
             GROUP BY d.department
             ORDER BY d.department;
         """
@@ -37,8 +42,8 @@ while True:
             SELECT 
                 d.department,
                 COUNT(DISTINCT vi.patient_id) AS total_patients
-            FROM visit vi
-            JOIN doctor d ON vi.doctor_id = d.doctor_id
+            FROM visits vi
+            JOIN doctors d ON vi.doctor_id = d.doctor_id
             GROUP BY d.department
             ORDER BY total_patients DESC;
         """
@@ -52,9 +57,9 @@ while True:
                 d.department,
                 vt.heart_rate, vt.bp_systolic, vt.bp_diastolic, vt.spo2, vt.recorded_time
             FROM vitals vt
-            JOIN visit vi ON vt.visit_id = vi.visit_id
-            JOIN patient p ON vi.patient_id = p.patient_id
-            JOIN doctor d ON vi.doctor_id = d.doctor_id
+            JOIN visits vi ON vt.visit_id = vi.visit_id
+            JOIN patients p ON vi.patient_id = p.patient_id
+            JOIN doctors d ON vi.doctor_id = d.doctor_id
             WHERE 
                 vt.heart_rate < 50 OR vt.heart_rate > 90 OR
                 vt.bp_systolic >= 140 OR
@@ -72,3 +77,5 @@ while True:
 
     else:
         print("Invalid choice. Please try again.")
+
+
