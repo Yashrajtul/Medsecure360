@@ -58,7 +58,42 @@ reports = [
 
 db_connection = MedsecureDBConnection(host, user, password, database)
 db_connection.reinitialize_database()
+db_connection.insert_patient(
+    "Yash", "Tulsyan", "yashwardhan.tulsyan@example.com",
+    "1234567890", "2220-09-24", "Male", "B+", 0, "Single"
+)
+
+
+
+
 # for report in reports:
 #     print(report["desc"])
 #     db_connection.print_output(query=report["query"])
 #     print()
+
+# while True:
+#     print("Welcome to Medsecure360")
+#     print("="*30)
+#     print("\nChoose option:")
+#     print("1. Enter patients data")
+#     print("9. Exit")
+#     option = input("Enter your option: ")
+    
+#     if option == 1:
+#         print("Enter patients details: ")
+#         first_name = input("Enter first name* :")
+#         last_name = input("Enter last name* :")
+#         email = input("Enter email* :")
+#         phone_number = input("Enter phone number* :")
+#         dob = input("Enter date of birth (yyyy-mm-dd)* :")
+#         gender = input("Enter gender (m/f)* :")
+#         blood_group = input("Enter blood group* :")
+#         is_insured = input("Are You insured (y/n)* :")
+#         if is_insured in ("Y", "y"):
+#             insurance_provider = input("Enter your insurance provider* :")
+        
+        
+#         allergies=None, existing_conditions=None, insurance_provider=None
+#     break
+
+

@@ -31,10 +31,10 @@ class MedsecureDBConnection:
                 database=self.database
             )
             if self.connection.is_connected():
-                print("Connected to MySQL database")
+                print("✅ Connected to MySQL database")
                 self.cursor = self.connection.cursor()
         except Error as e:
-            print(f"Error connecting to database: {e}")
+            print(f"❌ Error connecting to database: {e}")
             # throw exception for the ui    
             raise Exception(f"Error connecting to database: {e}")
             # return None
@@ -44,7 +44,7 @@ class MedsecureDBConnection:
             self.cursor.close()
         if hasattr(self, 'connection') and self.connection:
             self.connection.close()
-            print("Disconnected from MySQL database")
+            print("✅ Disconnected from MySQL database")
     
     # Method to create the database and tables
     def create_tables(self):
@@ -101,9 +101,9 @@ class MedsecureDBConnection:
             """
             self.cursor.execute(query)
             self.connection.commit()
-            print("med_source table created successfully")
+            print("✅ med_source table created successfully")
         except Error as e:
-            print(f"Error creating med_source table: {e}")
+            print(f"❌ Error creating med_source table: {e}")
             raise Exception(f"Error creating med_source table: {e}")
 
     def create_patients_table(self):
@@ -128,9 +128,9 @@ class MedsecureDBConnection:
             """
             self.cursor.execute(query)
             self.connection.commit()
-            print("patient table created successfully")
+            print("✅ patient table created successfully")
         except Error as e:
-            print(f"Error creating patient table: {e}")
+            print(f"❌ Error creating patient table: {e}")
             raise Exception(f"Error creating patient table: {e}")
     
     def create_doctors_table(self):
@@ -147,9 +147,9 @@ class MedsecureDBConnection:
             """
             self.cursor.execute(query)
             self.connection.commit()
-            print("doctor table created successfully")
+            print("✅ doctor table created successfully")
         except Error as e:
-            print(f"Error creating doctor table: {e}")
+            print(f"❌ Error creating doctor table: {e}")
             raise Exception(f"Error creating doctor table: {e}")
         
     def create_visits_table(self):
@@ -167,9 +167,9 @@ class MedsecureDBConnection:
             """
             self.cursor.execute(query)
             self.connection.commit()
-            print("visits table created successfully")
+            print("✅ visits table created successfully")
         except Error as e:
-            print(f"Error creating visits table: {e}")
+            print(f"❌ Error creating visits table: {e}")
             raise Exception(f"Error creating visits table: {e}")
         
     def create_medications_table(self):
@@ -187,9 +187,9 @@ class MedsecureDBConnection:
             """
             self.cursor.execute(query)
             self.connection.commit()
-            print("medications table created successfully")
+            print("✅ medications table created successfully")
         except Error as e:
-            print(f"Error creating medications table: {e}")
+            print(f"❌ Error creating medications table: {e}")
             raise Exception(f"Error creating medications table: {e}")
     
     def create_vitals_table(self):
@@ -208,9 +208,9 @@ class MedsecureDBConnection:
             """
             self.cursor.execute(query)
             self.connection.commit()
-            print("vitals table created successfully")
+            print("✅ vitals table created successfully")
         except Error as e:
-            print(f"Error creating vitals table: {e}")
+            print(f"❌ Error creating vitals table: {e}")
             raise Exception(f"Error creating vitals table: {e}")
             
     def create_diagnostics_table(self):
@@ -226,9 +226,9 @@ class MedsecureDBConnection:
             """
             self.cursor.execute(query)
             self.connection.commit()
-            print("diagnostics table created successfully")
+            print("✅ diagnostics table created successfully")
         except Error as e:
-            print(f"Error creating diagnostics table: {e}")
+            print(f"❌ Error creating diagnostics table: {e}")
             raise Exception(f"Error creating diagnostics table: {e}")
         
     
@@ -256,9 +256,9 @@ class MedsecureDBConnection:
             # for index, row in data.iterrows():
             #     self.cursor.execute(query, tuple(row))
             self.connection.commit()
-            print("Data loaded successfully from CSV")
+            print("✅ Data loaded successfully from CSV")
         except Error as e:
-            print(f"Error loading data from CSV: {e}")
+            print(f"❌ Error loading data from CSV: {e}")
             raise Exception(f"Error loading data from CSV: {e}")
         
     def initialize_database(self):
@@ -373,10 +373,10 @@ class MedsecureDBConnection:
             for query in insert_queries:
                 self.cursor.execute(query)
                 self.connection.commit()
-            print("Other tables initialized successfully")
+            print("✅ Other tables initialized successfully")
             
         except Error as e:
-            print(f"Error initializing other tables: {e}")     
+            print(f"❌ Error initializing other tables: {e}")     
             raise Exception(f"Error initializing other tables: {e}")       
         
     # Drop all tables in the database
@@ -389,21 +389,10 @@ class MedsecureDBConnection:
                 query = f"DROP TABLE IF EXISTS {table}"
                 self.cursor.execute(query)
             self.connection.commit()
-            print("All tables dropped successfully")
+            print("✅ All tables dropped successfully")
         except Error as e:
-            print(f"Error dropping tables: {e}")
+            print(f"❌ Error dropping tables: {e}")
             raise Exception(f"Error dropping tables: {e}")
-        
-    def insert_patient(self):
-        query = "INSERT INTO patients (name) VALUES (%s)"
-        try:
-            self.cursor.execute(query, (name,))
-            self.connection.commit()
-            print("Data inserted into city table successfully")
-        except Error as e:
-            print(f"Error inserting data into city table: {e}")
-            raise Exception(f"Error inserting data into city table: {e}")
-        pass
         
     def insert_diagnostics_from_json(self, json_path):
         try:
@@ -442,9 +431,9 @@ class MedsecureDBConnection:
                     """, (visit_id, test_name, test_result))
         
             self.connection.commit()
-            print("Diagnostics inserted successfully.")
+            print("✅ Diagnostics inserted successfully.")
         except Error as e:
-            print(f" Error inserting diagnostics data: {e}")
+            print(f"❌ Error inserting diagnostics data: {e}")
         
     # def insert_vitals(self, df: pd.DataFrame):
     #     df = df.astype(object) 
@@ -456,7 +445,7 @@ class MedsecureDBConnection:
     #         '''
     #         self.cursor.executemany(query, records)
     #         self.connection.commit()
-    #         print(f"[DB] Inserted {len(df)} records into the vitals table.")
+    #         print(f"✅ [DB] Inserted {len(df)} records into the vitals table.")
     #     except Error as e:
     #         print(f"Error inserting vitals: {e}")
     #     pass
@@ -470,7 +459,7 @@ class MedsecureDBConnection:
             tables = self.cursor.fetchall()
             return [table[0] for table in tables]
         except Error as e:
-            print(f"Error fetching table names: {e}")
+            print(f"❌ Error fetching table names: {e}")
             raise Exception(f"Error fetching table names: {e}")
             return None
         
@@ -481,7 +470,7 @@ class MedsecureDBConnection:
             columns = self.cursor.fetchall()
             return [column[0] for column in columns]
         except Error as e:
-            print(f"Error fetching columns for table {table_name}: {e}")
+            print(f"❌ Error fetching columns for table {table_name}: {e}")
             raise Exception(f"Error fetching columns for table {table_name}: {e}")
             return None
         
@@ -492,9 +481,54 @@ class MedsecureDBConnection:
             description = self.cursor.fetchall()
             return description
         except Error as e:
-            print(f"Error describing table {table_name}: {e}")
+            print(f"❌ Error describing table {table_name}: {e}")
             raise Exception(f"Error describing table {table_name}: {e}")
             return None
+    
+       
+    def insert_patient(self, first_name, last_name, email, phone_number, dob, gender, blood_group, is_insured, marital_status,
+                    allergies=None, existing_conditions=None, insurance_provider=None, address=None):
+        # Start building the query
+        query = """INSERT INTO patients (first_name, last_name, email, phone_number, date_of_birth, gender, blood_group, is_insured, marital_status"""
+        value_query = ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s"
+        values = [first_name, last_name, email, phone_number, dob, gender, blood_group, is_insured, marital_status]
+
+        if allergies is not None:
+            query += ", allergies"
+            value_query += ", %s"
+            values.append(allergies)
+
+        if existing_conditions is not None:
+            query += ", existing_conditions"
+            value_query += ", %s"
+            values.append(existing_conditions)
+
+        if insurance_provider is not None:
+            query += ", insurance_provider"
+            value_query += ", %s"
+            values.append(insurance_provider)
+
+        if address is not None:
+            query += ", address"
+            value_query += ", %s"
+            values.append(address)
+
+        query += value_query + ");"
+
+        # Debug: print the final query and values
+        # print("Final SQL Query:", query)
+        # print("Values:", values)
+        # print("Number of placeholders:", query.count('%s'))
+        # print("Number of values:", len(values))
+
+        try:
+            self.cursor.execute(query, values)
+            self.connection.commit()
+            print("✅ Data inserted into patients table successfully")
+        except Error as e:
+            print(f"❌ Error inserting data into patients table: {e}")
+            raise Exception(f"Error inserting data into patients table: {e}")
+
     
     def fetch_table_data(self, table_name, columns=None, where_clause=None, group_by=None, having=None, order_by=None, limit=None, offset=None):
         query = f"SELECT {', '.join(columns) if columns else '*'} FROM {table_name}"
@@ -522,7 +556,7 @@ class MedsecureDBConnection:
             result = self.cursor.fetchall()
             return result
         except Error as e:
-            print(f"Error executing select query: {e}")
+            print(f"❌ Error executing select query: {e}")
             raise Exception(f"Error executing select query: {e}")
             return None
         
@@ -532,7 +566,7 @@ class MedsecureDBConnection:
             result = self.cursor.fetchall()
             return result
         except Error as e:
-            print(f"Error executing query: {e}")
+            print(f"❌ Error executing query: {e}")
             raise Exception(f"Error executing query: {e}")
             return None
         
