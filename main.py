@@ -1,5 +1,6 @@
 from db.db_connection import MedsecureDBConnection
 from env import host, user, password, database
+import pandas as pd
 
 db_connection = MedsecureDBConnection(host, user, password, database)
 db_connection.reinitialize_database()
@@ -9,8 +10,8 @@ db_connection.reinitialize_database()
 # )
 
 def print_data(data):
-    for row in data:
-        print(row)
+    df = pd.DataFrame(data, columns=columns)
+    print(df)
 
 
 while True:
@@ -40,8 +41,7 @@ while True:
             ORDER BY d.department
             LIMIT 10;
         """
-        result = db_connection.fetch_query_result(avg_vitals)
-        print_data(result)
+        db_connection.fetch_query_result(avg_vitals)
 
     elif choice == '2':
         pat_by_dept = """
@@ -54,8 +54,7 @@ while True:
             ORDER BY total_patients DESC
             LIMIT 10;
         """
-        result = db_connection.fetch_query_result(pat_by_dept)
-        print_data(result)
+        db_connection.fetch_query_result(pat_by_dept)
 
     elif choice == '3':
         anomly_identify = """
@@ -75,13 +74,11 @@ while True:
             ORDER BY vt.recorded_time DESC
             LIMIT 10;
         """
-        result = db_connection.fetch_query_result(anomly_identify)
-        print_data(result)
+        db_connection.fetch_query_result(anomly_identify)
 
     elif choice == '4':
         user_query = input("Enter your SQL query:\n")
-        result = db_connection.fetch_query_result(user_query)
-        print(result)
+        db_connection.fetch_query_result(user_query)
 
     else:
         print("Invalid choice. Please try again.")

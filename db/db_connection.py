@@ -561,14 +561,24 @@ class MedsecureDBConnection:
             return None
         
     def fetch_query_result(self, query):
-        try:
-            self.cursor.execute(query)
-            result = self.cursor.fetchall()
-            return result
-        except Error as e:
-            print(f"❌ Error executing query: {e}")
-            raise Exception(f"Error executing query: {e}")
-            return None
+        # try:
+        #     self.cursor.execute(query)
+        #     result = self.cursor.fetchall()
+        #     return result
+        # except Error as e:
+        #     print(f"❌ Error executing query: {e}")
+        #     raise Exception(f"Error executing query: {e}")
+        #     return None
+            try:
+                self.cursor.execute(query)
+                result = self.cursor.fetchall()
+                columns = [desc[0] for desc in self.cursor.description]  # Get column names
+                df = pd.DataFrame(result, columns=columns)               # Convert to DataFrame
+                print("\n", df.to_string(index=False))                   # Print nicely
+                return df
+            except Error as e:
+                print(f"Error executing query: {e}")
+                raise Exception(f"Error executing query: {e}")
         
     def print_output(self, query=None, table_name=None, columns=None, where_clause=None, group_by=None, having=None, order_by=None, limit=None, offset=None):
         if query:
