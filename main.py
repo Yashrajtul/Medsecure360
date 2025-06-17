@@ -37,7 +37,8 @@ while True:
             JOIN visits vi ON vt.visit_id = vi.visit_id
             JOIN doctors d ON vi.doctor_id = d.doctor_id
             GROUP BY d.department
-            ORDER BY d.department;
+            ORDER BY d.department
+            LIMIT 10;
         """
         result = db_connection.fetch_query_result(avg_vitals)
         print_data(result)
@@ -50,7 +51,8 @@ while True:
             FROM visits vi
             JOIN doctors d ON vi.doctor_id = d.doctor_id
             GROUP BY d.department
-            ORDER BY total_patients DESC;
+            ORDER BY total_patients DESC
+            LIMIT 10;
         """
         result = db_connection.fetch_query_result(pat_by_dept)
         print_data(result)
@@ -70,7 +72,8 @@ while True:
                 vt.bp_systolic >= 140 OR
                 vt.bp_diastolic >= 90 OR
                 vt.spo2 < 92
-            ORDER BY vt.recorded_time DESC;
+            ORDER BY vt.recorded_time DESC
+            LIMIT 10;
         """
         result = db_connection.fetch_query_result(anomly_identify)
         print_data(result)
