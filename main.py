@@ -8,6 +8,11 @@ db_connection.reinitialize_database()
 #     "1234567890", "2220-09-24", "Male", "B+", 0, "Single"
 # )
 
+def print_data(data):
+    for row in data:
+        print(row)
+
+
 while True:
     print("\n--- MENU ---")
     print("1. Average Vitals per Department")
@@ -35,7 +40,7 @@ while True:
             ORDER BY d.department;
         """
         result = db_connection.fetch_query_result(avg_vitals)
-        print(result)
+        print_data(result)
 
     elif choice == '2':
         pat_by_dept = """
@@ -48,7 +53,7 @@ while True:
             ORDER BY total_patients DESC;
         """
         result = db_connection.fetch_query_result(pat_by_dept)
-        print(result)
+        print_data(result)
 
     elif choice == '3':
         anomly_identify = """
@@ -68,7 +73,7 @@ while True:
             ORDER BY vt.recorded_time DESC;
         """
         result = db_connection.fetch_query_result(anomly_identify)
-        print(result)
+        print_data(result)
 
     elif choice == '4':
         user_query = input("Enter your SQL query:\n")
