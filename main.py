@@ -38,7 +38,7 @@ while True:
             ORDER BY d.department
             LIMIT 10;
         """
-        db_connection.fetch_query_result(avg_vitals)
+        db_connection.print_query_result(avg_vitals)
 
     elif choice == '2':
         pat_by_dept = """
@@ -51,7 +51,7 @@ while True:
             ORDER BY total_patients DESC
             LIMIT 10;
         """
-        db_connection.fetch_query_result(pat_by_dept)
+        db_connection.print_query_result(pat_by_dept)
 
     elif choice == '3':
         anomly_identify = """
@@ -71,11 +71,11 @@ while True:
             ORDER BY vt.recorded_time DESC
             LIMIT 10;
         """
-        db_connection.fetch_query_result(anomly_identify)
+        db_connection.print_query_result(anomly_identify)
 
     elif choice == '4':
         user_query = input("Enter your SQL query:\n")
-        db_connection.fetch_query_result(user_query)
+        db_connection.print_query_result(user_query)
 
     else:
         print("Invalid choice. Please try again.")
