@@ -596,9 +596,9 @@ class MedsecureDBConnection:
             return
         
         if result:
-            # for row in result:
-            #     print(row)
-            print(result)
+            columns = [desc[0] for desc in self.cursor.description]
+            df = pd.DataFrame(result, columns=columns)
+            print("\n", df.to_string(index=False)) 
         else:
             print("No data found or error executing query")
             
