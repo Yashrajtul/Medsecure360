@@ -9,9 +9,6 @@ db_connection.reinitialize_database()
 #     "1234567890", "2220-09-24", "Male", "B+", 0, "Single"
 # )
 
-def print_data(data):
-    df = pd.DataFrame(data, columns=columns)
-    print(df)
 
 
 while True:
