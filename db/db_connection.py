@@ -245,8 +245,8 @@ class MedsecureDBConnection:
                 Allergies, Existing_Conditions, Insurance_Provider, Address, Marital_Status, Is_Insured,
                 Doctor_Name, Specialization, Department, Doctor_Email, Doctor_Phone, Visit_Date, Reason,
                 Medication_Name, Dosage, Start_Date, End_Date, Heart_Rate, BP_Systolic, BP_Diastolic,
-                SpO2, Recorded_Time, Test_Name, Test_Result
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                SpO2, Recorded_Time
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             # self.cursor.executemany(query, [tuple(r) for r in data.to_records(index=False)])
 
@@ -393,6 +393,17 @@ class MedsecureDBConnection:
         except Error as e:
             print(f"Error dropping tables: {e}")
             raise Exception(f"Error dropping tables: {e}")
+        
+    def insert_patient(self):
+        query = "INSERT INTO patients (name) VALUES (%s)"
+        try:
+            self.cursor.execute(query, (name,))
+            self.connection.commit()
+            print("Data inserted into city table successfully")
+        except Error as e:
+            print(f"Error inserting data into city table: {e}")
+            raise Exception(f"Error inserting data into city table: {e}")
+        pass
         
     def insert_diagnostics_from_json(self, json_path):
         try:
