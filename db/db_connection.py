@@ -116,13 +116,13 @@ class MedsecureDBConnection:
                 email VARCHAR(100) UNIQUE,
                 phone_number VARCHAR(20),
                 date_of_birth DATE,
-                gender VARCHAR(10),
+                gender ENUM('Male', 'Female', 'Other'),
                 blood_group VARCHAR(5),
                 allergies VARCHAR(100),
                 existing_conditions VARCHAR(100),
                 insurance_provider VARCHAR(100),
                 address TEXT,
-                marital_status VARCHAR(20),
+                marital_status ENUM('Single', 'Married', 'Divorced', 'Widowed'),
                 is_insured BOOLEAN
             );
             """
@@ -486,7 +486,7 @@ class MedsecureDBConnection:
             return None
     
        
-    def insert_patient(self, first_name, last_name, email, phone_number, dob, gender, blood_group, is_insured, marital_status,
+    def insert_patient(self, first_name, last_name, email, phone_number, dob, gender, blood_group, is_insured, marital_status="Single",
                     allergies=None, existing_conditions=None, insurance_provider=None, address=None):
         # Start building the query
         query = """INSERT INTO patients (first_name, last_name, email, phone_number, date_of_birth, gender, blood_group, is_insured, marital_status"""
@@ -560,9 +560,9 @@ class MedsecureDBConnection:
             raise Exception(f"Error executing select query: {e}")
             return None
         
-    def fetch_query_result(self, query):
+    def fetch_query_result(self, query: str, values: tuple=None):
         try:
-            self.cursor.execute(query)
+            self.cursor.execute(query, values)
             result = self.cursor.fetchall()
             return result
         except Error as e:
