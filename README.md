@@ -43,19 +43,16 @@
 
 ### 📥 1. Clone the Repository
 
-    ```bash
     git clone https://github.com/yourusername/MedSecure360.git
     cd MedSecure360
 
 
 ### 🐧 2. Setup on Linux/macOS
 
-    ```bash
     setup.sh
 
 ### 🪟 2. Setup on Windows
 
-    ```bash
     setup.bat
 
 ### ✅ This will:
@@ -65,7 +62,6 @@
 ### ⚠️ 3. Configure Environment
 Rename .env.py to env.py and add your MySQL database credentials:
 
-    ```bash
     host = "your_host"
     user = "your_username"
     password = "your_password"
@@ -73,6 +69,5 @@ Rename .env.py to env.py and add your MySQL database credentials:
 
 ▶️ 4. Run the Project
 
-    ```bash
     python main.py
     
