@@ -67,7 +67,12 @@ Rename .env.py to env.py and add your MySQL database credentials:
     password = "your_password"
     database = "your_database"
 
-▶️ 4. Run the Project
+### ▶️ 4. Run the Project
 
     python main.py
     
+### 🔐 Notes
+
+* Ensure MySQL server is running and accessible.
+* Wearable data and diagnostics must align with the normalized schema.
+* Comply with data privacy laws (HIPAA/GDPR) for real-world deployments.
