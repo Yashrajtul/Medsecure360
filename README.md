@@ -38,7 +38,41 @@
 
 ---
 
-## 🛠️ Setup Instructions
+
+## ⚙️ Getting Started
+
+### 📥 1. Clone the Repository
+
+    ```bash
+    git clone https://github.com/yourusername/MedSecure360.git
+    cd MedSecure360
 
 
+### 🐧 2. Setup on Linux/macOS
 
+    ```bash
+    setup.sh
+
+### 🪟 2. Setup on Windows
+
+    ```bash
+    setup.bat
+
+### ✅ This will:
+* Create a virtual environment
+* Install required packages from requirements.txt
+
+### ⚠️ 3. Configure Environment
+Rename .env.py to env.py and add your MySQL database credentials:
+
+    ```bash
+    host = "your_host"
+    user = "your_username"
+    password = "your_password"
+    database = "your_database"
+
+▶️ 4. Run the Project
+
+    ```bash
+    python main.py
+    
