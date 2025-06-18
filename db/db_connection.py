@@ -434,7 +434,6 @@ class MedsecureDBConnection:
         except Error as e:
             print(f"❌ Error inserting diagnostics data: {e}")
         
-        
     # Select query methods
     def fetch_table_names(self):
         query = "SHOW TABLES"
@@ -497,7 +496,6 @@ class MedsecureDBConnection:
             values.append(address)
 
         query += value_query + ");"
-
 
         try:
             self.cursor.execute(query, values)
