@@ -231,7 +231,6 @@ class MedsecureDBConnection:
             print(f"❌ Error creating diagnostics table: {e}")
             raise Exception(f"Error creating diagnostics table: {e}")
         
-    
     # Initialize the tables
     def load_from_csv(self, csv_file_path):
         try:
@@ -450,7 +449,6 @@ class MedsecureDBConnection:
     #         print(f"Error inserting vitals: {e}")
     #     pass
         
-    
     # Select query methods
     def fetch_table_names(self):
         query = "SHOW TABLES"
@@ -484,8 +482,7 @@ class MedsecureDBConnection:
             print(f"❌ Error describing table {table_name}: {e}")
             raise Exception(f"Error describing table {table_name}: {e}")
             return None
-    
-       
+        
     def insert_patient(self, first_name, last_name, email, phone_number, dob, gender, blood_group, is_insured, marital_status="Single",
                     allergies=None, existing_conditions=None, insurance_provider=None, address=None):
         # Start building the query
@@ -529,7 +526,6 @@ class MedsecureDBConnection:
             print(f"❌ Error inserting data into patients table: {e}")
             raise Exception(f"Error inserting data into patients table: {e}")
 
-    
     def fetch_table_data(self, table_name, columns=None, where_clause=None, group_by=None, having=None, order_by=None, limit=None, offset=None):
         query = f"SELECT {', '.join(columns) if columns else '*'} FROM {table_name}"
         
@@ -602,7 +598,6 @@ class MedsecureDBConnection:
         else:
             print("No data found or error executing query")
             
-    
     def print_results(self, results):
         if results:
             for row in results:
