@@ -434,20 +434,6 @@ class MedsecureDBConnection:
         except Error as e:
             print(f"❌ Error inserting diagnostics data: {e}")
         
-    # def insert_vitals(self, df: pd.DataFrame):
-    #     df = df.astype(object) 
-    #     records = [tuple(row) for row in df.itertuples(index=False, name=None)]
-    #     try:
-    #         query = '''
-    #             INSERT INTO wearable_vitals (Patient_ID, Timestamp, Heart_Rate, BP_Systolic, BP_Diastolic, SpO2)
-    #             VALUES (?, ?, ?, ?, ?, ?)
-    #         '''
-    #         self.cursor.executemany(query, records)
-    #         self.connection.commit()
-    #         print(f"✅ [DB] Inserted {len(df)} records into the vitals table.")
-    #     except Error as e:
-    #         print(f"Error inserting vitals: {e}")
-    #     pass
         
     # Select query methods
     def fetch_table_names(self):
@@ -512,11 +498,6 @@ class MedsecureDBConnection:
 
         query += value_query + ");"
 
-        # Debug: print the final query and values
-        # print("Final SQL Query:", query)
-        # print("Values:", values)
-        # print("Number of placeholders:", query.count('%s'))
-        # print("Number of values:", len(values))
 
         try:
             self.cursor.execute(query, values)
@@ -565,17 +546,7 @@ class MedsecureDBConnection:
             print(f"❌ Error executing query: {e}")
             raise Exception(f"Error executing query: {e}")
             return None
-        # try:
-        #     self.cursor.execute(query)
-        #     result = self.cursor.fetchall()
-        #     columns = [desc[0] for desc in self.cursor.description]  # Get column names
-        #     df = pd.DataFrame(result, columns=columns)               # Convert to DataFrame
-        #     print("\n", df.to_string(index=False))                   # Print nicely
-        #     return df
-        # except Error as e:
-        #     print(f"Error executing query: {e}")
-        #     raise Exception(f"Error executing query: {e}")
-        
+
     def print_query_result(self, query):
         result = self.fetch_query_result(query)
         columns = [desc[0] for desc in self.cursor.description]
